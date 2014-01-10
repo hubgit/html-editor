@@ -1,0 +1,28 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+body > * {
+	flex: 1;
+}
+
+body > form > [name] {
+	display: block;
+	width: 100%;
+	margin-bottom: 0.5rem;
+	border: none;
+}
+
+body > form > button {
+	margin-top: 1rem;
+}
+
+meta[itemprop] {
+	display: block;
+	color: #777;
+}
