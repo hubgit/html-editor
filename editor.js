@@ -28,6 +28,7 @@ $(function() {
 
             preview.css({
                 'position': 'absolute',
+                'left': 0,
                 'top': node.offset().top,
             });
 
@@ -69,15 +70,28 @@ $(function() {
 
         $('article').contentEditable().change(function(event) {
             if (event.action === 'update') {
+                if (editing) {
+                    return;
+                }
+
                 editing = true;
 
-                var data = event.changed.articleBody;
+                var savedSel = rangy.saveSelection();
+
+                //var data = event.changed.articleBody;
+                var data = previews.articleBody.html();
+
                 data = html_sanitize(data);
+
                 data = html_beautify(data, {
                     wrap_line_length: 0,
                     indent_size: -1
                 });
 
+                previews.articleBody.html(data);
+                rangy.restoreSelection(savedSel);
+
+                data = previews.articleBody.html();
                 editor.setValue(data);
 
                 editing = false;
