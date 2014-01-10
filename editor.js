@@ -70,10 +70,16 @@ $(function() {
         $('article').contentEditable().change(function(event) {
             if (event.action === 'update') {
                 editing = true;
-                editor.setValue(html_beautify(event.changed.articleBody, {
+
+                var data = event.changed.articleBody;
+                data = html_sanitize(data);
+                data = html_beautify(data, {
                     wrap_line_length: 0,
                     indent_size: -1
-                }));
+                });
+
+                editor.setValue(data);
+
                 editing = false;
             }
         });
