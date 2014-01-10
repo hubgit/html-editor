@@ -78,8 +78,11 @@ $(function() {
 
                 var savedSel = rangy.saveSelection();
 
+                var node = previews.articleBody.get(0).cloneNode();
+                $.clean(node);
+
                 //var data = event.changed.articleBody;
-                var data = previews.articleBody.html();
+                var data = node.innerHTML;
 
                 data = html_sanitize(data);
 

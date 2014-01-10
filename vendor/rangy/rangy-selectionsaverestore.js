@@ -33,7 +33,7 @@ rangy.createModule("SaveRestore", function(api, module) {
         boundaryRange.collapse(atStart);
 
         // Create the marker element containing a single invisible character using DOM methods and insert it
-        markerEl = doc.createElement("span");
+        markerEl = doc.createElement("i");
         markerEl.id = markerId;
         markerEl.style.lineHeight = "0";
         markerEl.style.display = "none";

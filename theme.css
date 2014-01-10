@@ -28,6 +28,7 @@
 
 .cm-s-html span.cm-property,
 .cm-s-html span.cm-attribute {
+    font-family: Courier, monospace;
     color: #48b685;
 }
 
@@ -37,6 +38,7 @@
 
 .cm-s-html span.cm-string {
     color: #fec418;
+    font-family: Courier, monospace;
     /*display: none;*/ /* hide attributes? */
 }
 
