@@ -4,7 +4,7 @@
 		merge(node);
 		unwrap(node);
 		unanchor(node);
-		removeEmpty(node, 'p');
+		//removeEmpty(node, 'p');
 		node.normalize();
 	};
 

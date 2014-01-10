@@ -9,7 +9,22 @@ $(function() {
             previews[property] = node;
         });
 
-        previews.articleBody.on('keypress', function(event){
+        previews.articleBody.on('keydown', function(event){
+            if (event.metaKey || event.ctrlKey) {
+                switch (event.which) {
+                    case 66:
+                        document.execCommand('bold');
+                        break;
+
+                    case 73:
+                        document.execCommand('italic');
+                        break;
+                }
+
+                event.preventDefault();
+                return;
+            }
+
             switch (event.which) {
                 case 13:
                     event.preventDefault();
@@ -68,7 +83,7 @@ $(function() {
             }
         });
 
-        $('article').contentEditable().change(function(event) {
+        $('article').contentEditable().on('change', function(event) {
             if (event.action === 'update') {
                 if (editing) {
                     return;
@@ -81,7 +96,6 @@ $(function() {
                 var node = previews.articleBody.get(0).cloneNode();
                 $.clean(node);
 
-                //var data = event.changed.articleBody;
                 var data = node.innerHTML;
 
                 data = html_sanitize(data);
