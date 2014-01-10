@@ -70,7 +70,10 @@ $(function() {
         $('article').contentEditable().change(function(event) {
             if (event.action === 'update') {
                 editing = true;
-                editor.setValue(html_beautify(event.changed.articleBody));
+                editor.setValue(html_beautify(event.changed.articleBody, {
+                    wrap_line_length: 0,
+                    indent_size: -1
+                }));
                 editing = false;
             }
         });
