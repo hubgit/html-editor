@@ -26,3 +26,9 @@ meta[itemprop] {
 	display: block;
 	color: #777;
 }
+
+input:focus,
+textarea:focus,
+[contenteditable]:focus {
+	outline: 0px solid transparent;
+}

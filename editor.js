@@ -1,13 +1,21 @@
 $(function() {
-    var inputs = {};
     var previews = {};
 
     var preparePreviews = function() {
-        $('body > article [itemprop]').each(function() {
+        $('article [itemprop]').each(function() {
             var node = $(this);
             var property = node.attr('itemprop');
 
             previews[property] = node;
+        });
+
+        previews.articleBody.on('keypress', function(event){
+            switch (event.which) {
+                case 13:
+                    event.preventDefault();
+                    document.execCommand('InsertParagraph', false);
+                    break;
+            }
         });
     };
 
@@ -16,6 +24,7 @@ $(function() {
             var node = $(this);
             var name = node.attr('name');
             var preview = previews[name];
+            var previewNode = preview.get(0);
 
             preview.css({
                 'position': 'absolute',
@@ -37,21 +46,38 @@ $(function() {
 
     var prepareEditor = function() {
         var input = document.forms[0].articleBody;
+        var node = $(input).trigger('change');
+        var editing = false;
 
         var editor = CodeMirror.fromTextArea(input, {
-            mode: 'htmlmixed',
+            mode: 'text/html',
             theme: 'html',
+            autoCloseTags: {
+                indentTags: false,
+                whenOpening: true,
+                whenClosing: true,
+            },
             lineWrapping: true,
-            electricChars: false,
         });
 
-        var node = $(input).trigger('change');
+        editor.on('change', function(editor) {
+            node.val(editor.getValue());
+            if (!editing) {
+                node.trigger('change');
+            }
+        });
 
-        var updatePreview = function(editor) {
-            node.val(editor.getValue()).trigger('change');
-        };
+        $('article').contentEditable().change(function(event) {
+            if (event.action === 'update') {
+                editing = true;
+                editor.setValue(html_beautify(event.changed.articleBody));
+                editing = false;
+            }
+        });
 
-        editor.on('change', updatePreview);
+        $('.CodeMirror').on('click', '.cm-tag', function(event) {
+            console.log(event);
+        });
     };
 
     preparePreviews();

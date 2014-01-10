@@ -8,17 +8,17 @@
 <link rel="stylesheet" href="article.css">
 
 <script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/jquery/jquery.contenteditable.js"></script>
+<script src="vendor/js-beautify/beautify-html.js"></script>
 <script src="vendor/codemirror/lib/codemirror.js"></script>
-<script src="vendor/codemirror/mode/htmlmixed.js"></script>
-<script src="vendor/codemirror/mode/javascript.js"></script>
 <script src="vendor/codemirror/mode/xml.js"></script>
-<script src="vendor/codemirror/mode/css.js"></script>
+<script src="vendor/codemirror/addon/closetag.js"></script>
 <script src="editor.js"></script>
 
 <form>
 	<input type="text" name="name" placeholder="Title">
 	<textarea name="description" placeholder="Description" rows="2"></textarea>
-	<textarea name="articleBody" placeholder="Body" autofocus></textarea>
+	<textarea name="articleBody" placeholder="Body" autofocus><section>&#010;<p>&#010;</p>&#010;</section></textarea>
 	<button type="submit">Save</button>
 </form>
 
@@ -27,6 +27,6 @@
 		<h1 itemprop="name"></h1>
 		<meta itemprop="description"></meta>
 	</header>
-	<main itemprop="articleBody"></main>
+	<main itemprop="articleBody" contenteditable></main>
 	<footer></footer>
 </article>
